@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
-import {ForgetPasswordDto} from '../../dto/forget-password.dto';
 
 @UntilDestroy()
 @Component({
@@ -29,7 +28,7 @@ export class ForgetPasswordComponent {
       return;
     }
 
-    const formValue: ForgetPasswordDto = this.form.value;
+    const formValue = this.form.value;
     this.auth.forgetPassword(formValue).pipe(
       untilDestroyed(this)
     ).subscribe({

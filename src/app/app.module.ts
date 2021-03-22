@@ -9,7 +9,12 @@ import { MainModule } from './main/main.module';
 import { SessionModule } from './session/session.module';
 import { iconsPathFactory, TUI_ICONS_PATH, TuiNotificationsModule, TuiRootModule } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
-import {HeaderModule} from './ui/header/header.module';
+import {persistState} from '@datorama/akita';
+
+export const sessionStorage = persistState({
+  include: ['session'],
+  key: 'token'
+});
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +27,11 @@ import {HeaderModule} from './ui/header/header.module';
     TuiNotificationsModule,
     MainModule,
     SessionModule,
-    HeaderModule
   ],
   providers: [
+    {
+      provide: 'sessionStorage', useValue: sessionStorage
+    },
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {

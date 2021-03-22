@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import {LoginRequestDto} from '../dto/login-request.dto';
-import {RegisterRequestDto} from '../dto/register-request.dto';
-import {ForgetPasswordDto} from '../dto/forget-password.dto';
-import {ResetPasswordDto} from '../dto/reset-password.dto';
+import {Observable, of} from 'rxjs';
+import {LoginRequest} from './login.interface';
+import {RegisterRequest} from './register.interface';
 
 @Injectable()
 export class AuthService {
@@ -13,23 +11,26 @@ export class AuthService {
   ) {
   }
 
-  public signIn(form: LoginRequestDto): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('login', form);
+  public signIn(form: LoginRequest): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>('api/login', form);
   }
 
-  public signUp(form: RegisterRequestDto): Observable<void> {
-    return this.http.post<void>('register', form);
+  public signUp(form: RegisterRequest): Observable<void> {
+    return this.http.post<void>('api/register', form);
   }
 
+  // todo
   public confirmEmail(token: string): Observable<void> {
-    return this.http.post<void>('confirm-user', { token });
+    return of(null);
   }
 
-  public forgetPassword(form: ForgetPasswordDto): Observable<void> {
-    return this.http.post<void>('forget-password', form);
+  // todo
+  public forgetPassword(form: any): Observable<void> {
+    return of(null);
   }
 
-  public resetPassword(data: ResetPasswordDto): Observable<void> {
-    return this.http.post<void>('reset-password', data);
+  // todo
+  public resetPassword(data: any): Observable<void> {
+    return of(null);
   }
 }
