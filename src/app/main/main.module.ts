@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './main/main.component';
 import {HeaderModule} from '../ui/header/header.module';
 import {TuiButtonModule} from '@taiga-ui/core';
+import {UserTasksModule} from './tasks/user-tasks/user-tasks.module';
 
 
 @NgModule({
@@ -11,6 +12,7 @@ import {TuiButtonModule} from '@taiga-ui/core';
     CommonModule,
     HeaderModule,
     TuiButtonModule,
+    UserTasksModule,
   ],
   exports: [MainComponent]
 })

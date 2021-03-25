@@ -26,7 +26,7 @@
     "@taiga-ui/icons": "^2.3.0",
     "@taiga-ui/kit": "^2.3.0",
     "class-validator": "^0.13.1",
-    "jwt-decode": "^2.2.0",
+    "jwt-decode": "3.1.2",
     "ngx-captcha": "^8.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

@@ -147,6 +147,7 @@
       "element",
       "app",
       "kebab-case"
-    ]
+    ],
+    "space-in-brackets": ["error", "always"]
   }
 }
