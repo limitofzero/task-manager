@@ -6,4 +6,11 @@
     line-height: 44px;
     font-size: 15px;
   }
+
+  &-expanded-el {
+    line-height: 44px;
+    font-size: 15px;
+    cursor: pointer;
+    display: block;
+  }
 }

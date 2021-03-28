@@ -1,5 +1,18 @@
 <nav class="nav">
-  <a tuiLink class="nav-el">Tasks</a>
+  <app-expanded-nav-el>
+    <a class="nav-expanded-el">Tasks</a>
+    <ng-container ngProjectAs="links">
+      <a tuiLink class="nav-el">
+        My open tasks
+      </a>
+      <a tuiLink class="nav-el">
+        All tasks
+      </a>
+      <a tuiLink class="nav-el">
+        Completed tasks
+      </a>
+    </ng-container>
+  </app-expanded-nav-el>
   <a tuiLink class="nav-el">Projects</a>
   <a tuiLink class="nav-el">Settings</a>
   <a tuiLink class="nav-el">Profile</a>
