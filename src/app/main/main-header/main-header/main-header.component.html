@@ -1,0 +1,18 @@
+<app-header>
+  <div class="toolbar">
+    <button tuiIconButton icon="tuiIconStructureLarge" appearance="flat"></button>
+    <tui-select
+      class="control"
+      *tuiLet="projects | async as projs"
+      [formControl]="projectControl">
+        Projects
+      <ng-template tuiDataList>
+        <tui-data-list>
+          <button *ngFor="let project of projs" tuiOption [value]="project.id">
+            {{ project.name }}
+          </button>
+        </tui-data-list>
+      </ng-template>
+    </tui-select>
+  </div>
+</app-header>
