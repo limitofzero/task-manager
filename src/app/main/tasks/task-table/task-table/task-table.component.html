@@ -1,18 +1,16 @@
-<table tuiTable class="tui-table">
+<table tuiTable class="tui-table" [columns]="columns">
   <thead>
-  <tr tuiThGroup class="tui-table__tr">
-    <th tuiTh>
+  <tr tuiThGroup>
+    <th *tuiHead="'id'" tuiTh>
       Key
     </th>
-    <th tuiTh>Description</th>
+    <th *tuiHead="'title'" tuiTh>Description</th>
   </tr>
   </thead>
-  <tbody tuiTbody>
-  <ng-container *ngFor="let task of tasks">
-    <tr class="tui_table__tr">
-      <td class="tui-table__td">{{ task.id }}</td>
-      <td class="tui-table__td">{{ task.title }}</td>
-    </tr>
-  </ng-container>
+  <tbody tuiTbody [data]="tasks">
+  <tr *tuiRow="let task of tasks;" tuiTr>
+    <td *tuiCell="'id'" tuiTd>{{ task.id }}</td>
+    <td *tuiCell="'title'" tuiTd>{{ task.title }}</td>
+  </tr>
   </tbody>
 </table>

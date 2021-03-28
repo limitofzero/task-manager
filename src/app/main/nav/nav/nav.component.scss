@@ -1,0 +1,9 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+
+  &-el {
+    line-height: 44px;
+    font-size: 15px;
+  }
+}

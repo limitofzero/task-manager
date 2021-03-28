@@ -7,5 +7,7 @@ import {Task} from '../../task.interface';
   styleUrls: ['./task-table.component.scss'],
 })
 export class TaskTableComponent {
+  public readonly columns = ['id', 'title'];
+
   @Input() tasks: Task[] = [];
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Task} from '../task.interface';
-import {Store} from '@datorama/akita';
+import {guid, Store} from '@datorama/akita';
 
 export interface TaskState {
   tasks: Task[];
@@ -9,6 +9,6 @@ export interface TaskState {
 @Injectable()
 export class TaskStore extends Store<TaskState> {
   constructor() {
-    super({ tasks: [] });
+    super({ tasks: [] }, { name: `all-user-tasks-${guid()}` });
   }
 }

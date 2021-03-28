@@ -1,4 +1,11 @@
 <app-header>
   <button tuiIconButton icon="tuiIconStructureLarge" appearance="flat"></button>
 </app-header>
-<app-user-tasks [userId]="userId | async"></app-user-tasks>
+<main class="tui-container tui-container_fullwidth">
+  <div class="tui-row">
+    <app-nav class="tui-col_md-2 tui-col_lg-2 nav"></app-nav>
+    <div class="tui-col_md-10 tui-col_lg-10">
+      <app-user-tasks [userId]="userId | async"></app-user-tasks>
+    </div>
+  </div>
+</main>

@@ -25,7 +25,6 @@ export class UserTasksComponent implements OnInit {
     this.performerId.next(value);
   }
 
-
   constructor(
     private readonly taskApi: TasksApiService,
     private readonly taskQuery: TaskQuery,
