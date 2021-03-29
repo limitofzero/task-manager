@@ -8,6 +8,7 @@ import {SessionQuery} from '../../../session/session.query';
 import {map, switchMap} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {FormControl} from '@angular/forms';
+import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
 
 @UntilDestroy()
 @Component({
@@ -39,4 +40,12 @@ export class MainHeaderComponent implements OnInit {
     });
   }
 
+  @tuiPure
+  public stringify(
+    items: ReadonlyArray<Project>,
+  ): TuiStringHandler<TuiContextWithImplicit<string>> {
+    const map = new Map(items.map(({id, name}) => [id, name] as [string, string]));
+
+    return ({$implicit}: TuiContextWithImplicit<string>) => map.get($implicit) || '';
+  }
 }

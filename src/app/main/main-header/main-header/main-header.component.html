@@ -4,6 +4,7 @@
     <tui-select
       class="control"
       *tuiLet="projects | async as projs"
+      [valueContent]="stringify(projs)"
       [formControl]="projectControl">
         Projects
       <ng-template tuiDataList>
