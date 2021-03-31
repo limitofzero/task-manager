@@ -1,0 +1,18 @@
+<tui-select
+  class="control"
+  [valueContent]="content"
+  [formControl]="projectControl">
+  Projects
+
+  <tui-data-list-wrapper
+    *tuiDataList
+    [items]="projects | async"
+    [itemContent]="content"
+  ></tui-data-list-wrapper>
+</tui-select>
+
+<ng-template #content let-item>
+  <div>
+    {{ item.name }}
+  </div>
+</ng-template>

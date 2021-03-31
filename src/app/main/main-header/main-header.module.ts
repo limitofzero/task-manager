@@ -6,11 +6,12 @@ import {TuiButtonModule, TuiDataListModule} from '@taiga-ui/core';
 import {TuiComboBoxModule, TuiDataListWrapperModule, TuiSelectModule} from '@taiga-ui/kit';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TuiLetModule} from '@taiga-ui/cdk';
+import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 
 
 
 @NgModule({
-  declarations: [MainHeaderComponent],
+  declarations: [MainHeaderComponent, ProjectSelectorComponent],
   exports: [
     MainHeaderComponent
   ],
