@@ -3,17 +3,21 @@
     <button tuiIconButton icon="tuiIconStructureLarge" appearance="flat"></button>
     <tui-select
       class="control"
-      *tuiLet="projects | async as projs"
-      [valueContent]="stringify(projs)"
+      [valueContent]="content"
       [formControl]="projectControl">
         Projects
-      <ng-template tuiDataList>
-        <tui-data-list>
-          <button *ngFor="let project of projs" tuiOption [value]="project.id">
-            {{ project.name }}
-          </button>
-        </tui-data-list>
-      </ng-template>
+
+      <tui-data-list-wrapper
+        *tuiDataList
+        [items]="projects | async"
+        [itemContent]="content"
+      ></tui-data-list-wrapper>
     </tui-select>
+
+    <ng-template #content let-item>
+      <div>
+        {{ item.name }}
+      </div>
+    </ng-template>
   </div>
 </app-header>

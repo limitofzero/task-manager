@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import {HeaderModule} from '../../ui/header/header.module';
 import {TuiButtonModule, TuiDataListModule} from '@taiga-ui/core';
-import {TuiComboBoxModule, TuiSelectModule} from '@taiga-ui/kit';
+import {TuiComboBoxModule, TuiDataListWrapperModule, TuiSelectModule} from '@taiga-ui/kit';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TuiLetModule} from '@taiga-ui/cdk';
 
@@ -14,15 +14,16 @@ import {TuiLetModule} from '@taiga-ui/cdk';
   exports: [
     MainHeaderComponent
   ],
-  imports: [
-    CommonModule,
-    HeaderModule,
-    TuiButtonModule,
-    TuiSelectModule,
-    ReactiveFormsModule,
-    TuiComboBoxModule,
-    TuiDataListModule,
-    TuiLetModule
-  ]
+    imports: [
+        CommonModule,
+        HeaderModule,
+        TuiButtonModule,
+        TuiSelectModule,
+        ReactiveFormsModule,
+        TuiComboBoxModule,
+        TuiDataListModule,
+        TuiLetModule,
+        TuiDataListWrapperModule
+    ]
 })
 export class MainHeaderModule { }
