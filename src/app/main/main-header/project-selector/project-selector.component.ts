@@ -5,7 +5,7 @@ import {Project} from '../../projects/project';
 import {ProjectsApiService} from '../../projects/projects-api.service';
 import {UserProjectsQuery} from '../../projects/user-projects.query';
 import {UserProjectsStore} from '../../projects/user-projects.store';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {filter, switchMap} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -31,7 +31,6 @@ export class ProjectSelectorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // todo get user id from input
     this.userIdStream.pipe(
       filter(id => !!id),
       switchMap(id => this.projectsApi.getUserProjects(id)),

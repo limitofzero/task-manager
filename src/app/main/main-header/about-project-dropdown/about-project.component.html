@@ -1,0 +1,28 @@
+<tui-hosted-dropdown [content]="content">
+  <button tuiIconButton icon="tuiIconStructureLarge" size="m" appearance="flat"></button>
+</tui-hosted-dropdown>
+
+<ng-template #content>
+  <tui-data-list role="menu">
+    <tui-opt-group>
+      <a tuiOption class="dropdown-el">
+        <tui-svg src="tuiIconFrameLarge" class="tui-space_right-2"></tui-svg>
+        Main page
+      </a>
+      <a tuiOption class="dropdown-el">
+        <tui-svg src="tuiIconMailLarge" class="tui-space_right-2"></tui-svg>
+        Slack integration
+      </a>
+    </tui-opt-group>
+    <tui-opt-group>
+      <a tuiOption class="dropdown-el">
+        <tui-svg src="tuiIconEditLarge" class="tui-space_right-2"></tui-svg>
+        About author
+      </a>
+      <a tuiOption class="dropdown-el">
+        <tui-svg src="tuiIconDownloadLarge" class="tui-space_right-2"></tui-svg>
+        Repository
+      </a>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>
