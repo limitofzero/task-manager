@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TuiLetModule} from '@taiga-ui/cdk';
 import { ProjectSelectorComponent } from './project-selector/project-selector.component';
 import {AboutProjectDropdownModule} from './about-project-dropdown/about-project-dropdown.module';
+import {CreateTaskBtnModule} from './create-task-btn/create-task-btn.module';
 
 
 
@@ -27,7 +28,8 @@ import {AboutProjectDropdownModule} from './about-project-dropdown/about-project
     TuiLetModule,
     TuiDataListWrapperModule,
     TuiTextfieldControllerModule,
-    AboutProjectDropdownModule
+    AboutProjectDropdownModule,
+    CreateTaskBtnModule
   ]
 })
 export class MainHeaderModule { }

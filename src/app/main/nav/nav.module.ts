@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './nav.component';
 import { TuiButtonModule, TuiExpandModule, TuiLinkModule, TuiSvgModule } from '@taiga-ui/core';
 import { ExpandedNavElComponent } from './expanded-nav-el/expanded-nav-el.component';
 

@@ -27,6 +27,7 @@
     "@taiga-ui/core": "2.6.2",
     "@taiga-ui/icons": "2.6.2",
     "@taiga-ui/kit": "2.6.2",
+    "@tinkoff/ng-polymorpheus": "^3.0.0",
     "class-validator": "^0.13.1",
     "jwt-decode": "3.1.2",
     "ngx-captcha": "^8.0.1",

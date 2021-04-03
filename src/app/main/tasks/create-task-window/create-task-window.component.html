@@ -1,0 +1,22 @@
+<form class="create-task" [formGroup]="form">
+  <tui-select
+    class="control"
+    tuiTextfieldSize="m"
+    [valueContent]="content"
+    formControlName="projectId">
+    Projects
+
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="projects | async"
+      [itemContent]="content"
+    ></tui-data-list-wrapper>
+  </tui-select>
+
+  <ng-template #content let-item>
+    <div>
+      {{ item.name }}
+    </div>
+  </ng-template>
+
+</form>
