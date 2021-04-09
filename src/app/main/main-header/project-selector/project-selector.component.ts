@@ -1,45 +1,34 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Project} from '../../projects/project';
-import {ProjectsApiService} from '../../projects/projects-api.service';
-import {UserProjectsQuery} from '../../projects/user-projects.query';
-import {UserProjectsStore} from '../../projects/user-projects.store';
 import {filter, switchMap} from 'rxjs/operators';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {UserProjectsFacadeService} from '../../projects/user-projects/user-projects-facade.service';
 
-@UntilDestroy()
 @Component({
   selector: 'app-project-selector',
   templateUrl: './project-selector.component.html',
-  styleUrls: ['./project-selector.component.scss']
+  styleUrls: ['./project-selector.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectSelectorComponent implements OnInit {
-  public projectControl = new FormControl('');
-  public readonly projects: Observable<Project[]> = this.projectsQuery.selectAll();
+  public readonly projectControl = new FormControl('');
+  public projects: Observable<Project[]>;
 
-  private userIdStream = new BehaviorSubject<string>(null);
+  private readonly userIdStream = new BehaviorSubject<string>(null);
 
   @Input('userId') set userId(value: string) {
     this.userIdStream.next(value);
   }
 
   constructor(
-    private readonly projectsApi: ProjectsApiService,
-    private readonly projectsQuery: UserProjectsQuery,
-    private readonly projectsStore: UserProjectsStore,
-  ) { }
+    private readonly userProjects: UserProjectsFacadeService,
+  ) {}
 
   ngOnInit(): void {
-    this.userIdStream.pipe(
+    this.projects = this.userIdStream.pipe(
       filter(id => !!id),
-      switchMap(id => this.projectsApi.getUserProjects(id)),
-      untilDestroyed(this),
-    ).subscribe({
-      next: value => {
-        this.projectsStore.add(value);
-      },
-    });
+      switchMap(id => this.userProjects.getProjects(id)),
+    );
   }
-
 }

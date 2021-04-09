@@ -11,7 +11,7 @@ export class ProjectsApiService {
     private readonly http: HttpClient,
   ) { }
 
-  public getUserProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`api/projects/by-user/${userId}`);
+  public getProjectsByUserId(userId: string): Observable<Project[]> {
+    return this.http.get<Project[]>(`api/projects?userId=${userId}`);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TasksApiService} from '../tasks-api.service';
-import {UserProjectsQuery} from '../../projects/user-projects.query';
+import {UserProjectsQuery} from '../../projects/user-projects/user-projects.query';
 
 @Component({
   selector: 'app-create-task-window',
