@@ -1,14 +1,30 @@
 <form class="create-task" [formGroup]="form">
   <tui-select
-    class="control"
+    class="control tui-space_bottom-3"
     tuiTextfieldSize="m"
     [valueContent]="content"
+    [tuiTextfieldLabelOutside]="true"
     formControlName="projectId">
-    Projects
+    Project
 
     <tui-data-list-wrapper
       *tuiDataList
       [items]="projects | async"
+      [itemContent]="content"
+    ></tui-data-list-wrapper>
+  </tui-select>
+
+  <tui-select
+    class="control tui-space_bottom-3"
+    tuiTextfieldSize="m"
+    [valueContent]="content"
+    [tuiTextfieldLabelOutside]="true"
+    formControlName="typeId">
+    Task type
+
+    <tui-data-list-wrapper
+      *tuiDataList
+      [items]="taskTypes | async"
       [itemContent]="content"
     ></tui-data-list-wrapper>
   </tui-select>
@@ -18,5 +34,22 @@
       {{ item.name }}
     </div>
   </ng-template>
+
+  <hr class="tui-space_bottom-3">
+
+  <tui-input
+    class="tui-space_bottom-3"
+    tuiTextfieldSize="m"
+    formControlName="title"
+    [tuiTextfieldLabelOutside]="true"
+  >
+    Title
+  </tui-input>
+
+  <tui-text-area
+    class="description"
+    formControlName="description">
+    Description
+  </tui-text-area>
 
 </form>

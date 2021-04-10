@@ -12,6 +12,10 @@
           "skipTests": true,
           "flat": true,
         },
+        "@schematics/angular:service": {
+          "skipTests": true,
+          "flat": true
+        },
         "@schematics/angular:application": {
           "strict": true
         }

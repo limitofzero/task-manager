@@ -1,7 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TasksApiService} from '../tasks-api.service';
-import {UserProjectsQuery} from '../../projects/user-projects/user-projects.query';
+import {UserProjectsFacadeService} from '../../projects/user-projects/user-projects-facade.service';
+import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
+import {TuiDialogContext} from '@taiga-ui/core';
+import {Observable} from 'rxjs';
+import {Project} from '../../projects/project';
+import {TaskType} from '../../task-types/task-type';
+import {TaskTypeFacadeService} from '../../task-types/task-type-facade.service';
 
 @Component({
   selector: 'app-create-task-window',
@@ -9,31 +14,35 @@ import {UserProjectsQuery} from '../../projects/user-projects/user-projects.quer
   styleUrls: ['./create-task-window.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CreateTaskWindowComponent implements OnInit {
+export class CreateTaskWindowComponent {
+  private readonly userId: string;
+
   public readonly form: FormGroup;
-  public readonly projects = this.projectsQuery.selectAll();
+  public readonly projects: Observable<Project[]>;
+  public readonly taskTypes: Observable<TaskType[]>;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly taskApi: TasksApiService,
-    private readonly projectsQuery: UserProjectsQuery,
+    private readonly userProjectsService: UserProjectsFacadeService,
+    private readonly taskTypesService: TaskTypeFacadeService,
+    @Inject(POLYMORPHEUS_CONTEXT)
+    private readonly context: TuiDialogContext<{ userId: string }>
   ) {
+    this.userId = (this.context.data as { userId: string }).userId;
+    this.projects = this.userProjectsService.getProjects(this.userId);
+    this.taskTypes = this.taskTypesService.getTaskTypes();
     this.form = this.createForm();
   }
 
   private createForm(): FormGroup {
     return this.fb.group({
-      projectId: this.fb.control([null, [Validators.required]]),
-      typeId: this.fb.control([null, [Validators.required]]),
-      title: this.fb.control(['', [Validators.required]]),
-      description: this.fb.control(['']),
-      performerId: this.fb.control([null]),
-      creatorId: this.fb.control([null, [Validators.required]]),
-      statusId: this.fb.control([1, [Validators.required]]),
+      projectId: [null, [Validators.required]],
+      typeId: [null, [Validators.required]],
+      title: ['', [Validators.required]],
+      description: [''],
+      performerId: [null],
+      creatorId: [this.userId, [Validators.required]],
+      statusId: [1, [Validators.required]],
     });
   }
-
-  ngOnInit(): void {
-  }
-
 }
