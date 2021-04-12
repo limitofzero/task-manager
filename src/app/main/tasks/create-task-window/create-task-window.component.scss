@@ -1,9 +1,21 @@
 .create-task {
   display: flex;
   flex-direction: column;
-  min-height: 800px;
 
   .description {
     min-height: 300px;
+  }
+
+  .performer {
+    display: flex;
+
+    tui-select {
+      flex-grow: 1;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
   }
 }

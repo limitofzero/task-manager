@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {EntityState, EntityStore, StoreConfig} from '@datorama/akita';
 import {TaskType} from './task-type';
 
-export interface State extends EntityState<TaskType, string> {}
+export interface State extends EntityState<TaskType, number> {}
 
 @Injectable({
   providedIn: 'root'

@@ -1,39 +1,39 @@
-<form class="create-task" [formGroup]="form">
+<form class="create-task" [formGroup]="form" (ngSubmit)="onSubmit()">
   <tui-select
     class="control tui-space_bottom-3"
+    *tuiLet="projects | async as items"
     tuiTextfieldSize="m"
-    [valueContent]="content"
+    [valueContent]="stringify(items, 'id', 'name')"
     [tuiTextfieldLabelOutside]="true"
     formControlName="projectId">
     Project
 
-    <tui-data-list-wrapper
-      *tuiDataList
-      [items]="projects | async"
-      [itemContent]="content"
-    ></tui-data-list-wrapper>
+    <ng-template tuiDataList>
+      <tui-data-list>
+        <button *ngFor="let item of items" tuiOption [value]="item.id">
+          {{ item.name }}
+        </button>
+      </tui-data-list>
+    </ng-template>
   </tui-select>
 
   <tui-select
     class="control tui-space_bottom-3"
     tuiTextfieldSize="m"
-    [valueContent]="content"
+    *tuiLet="taskTypes | async as taskTypes"
+    [valueContent]="stringify(taskTypes, 'id', 'name')"
     [tuiTextfieldLabelOutside]="true"
     formControlName="typeId">
     Task type
 
-    <tui-data-list-wrapper
-      *tuiDataList
-      [items]="taskTypes | async"
-      [itemContent]="content"
-    ></tui-data-list-wrapper>
+    <ng-template tuiDataList>
+      <tui-data-list>
+        <button *ngFor="let taskType of taskTypes" tuiOption [value]="taskType.id">
+          {{ taskType.name }}
+        </button>
+      </tui-data-list>
+    </ng-template>
   </tui-select>
-
-  <ng-template #content let-item>
-    <div>
-      {{ item.name }}
-    </div>
-  </ng-template>
 
   <hr class="tui-space_bottom-3">
 
@@ -47,9 +47,45 @@
   </tui-input>
 
   <tui-text-area
-    class="description"
+    class="description tui-space_bottom-3"
     formControlName="description">
     Description
   </tui-text-area>
 
+  <div class="performer">
+    <tui-select
+      class="control tui-space_bottom-3"
+      tuiTextfieldSize="m"
+      *tuiLet="users | async as users"
+      [valueContent]="stringify(users, 'id', 'username')"
+      [tuiTextfieldLabelOutside]="true"
+      formControlName="performerId">
+      Performer
+
+      <ng-template tuiDataList>
+        <tui-data-list>
+          <button *ngFor="let user of users" tuiOption [value]="user.id">
+            {{ user.username }}
+          </button>
+        </tui-data-list>
+      </ng-template>
+    </tui-select>
+
+    <button tuiIconButton
+            class="tui-space_left-1"
+            size="m"
+            tuiHint="Assign me"
+            tuiHintDirection="right"
+            (click)="assignMe()"
+            [disabled]="!form.get('projectId').value"
+            icon="tuiIconUser"></button>
+  </div>
+
+  <div class="buttons">
+    <button tuiButton appearance="flat">Cancel</button>
+    <button type="submit"
+            tuiButton
+            class="tui-space_left-1"
+            [disabled]="form.invalid">Create</button>
+  </div>
 </form>
