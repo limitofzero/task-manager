@@ -12,12 +12,11 @@ export class TasksApiService {
     private readonly http: HttpClient
   ) { }
 
-  public getTasksByUser(userId: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`api/tasks/performer/${userId}`);
+  public getTasks(params: { performerId?: string }): Observable<Task[]> {
+    return this.http.get<Task[]>(`api/tasks`, { params });
   }
 
   public create(task: CreateTask): Observable<Task> {
-    console.log(task);
     return this.http.post<Task>('api/tasks', task);
   }
 }

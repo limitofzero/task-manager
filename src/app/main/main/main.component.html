@@ -3,7 +3,7 @@
   <div class="tui-row tui-row_adaptive">
     <app-nav class="tui-col_sm-3 tui-col_md-3 tui-col_lg-2 nav"></app-nav>
     <div class="tui-col_sm-9 tui-col_md-9 tui-col_lg-10">
-      <app-user-tasks [userId]="userId | async"></app-user-tasks>
+      <app-user-tasks class="tasks-table" [userId]="userId | async"></app-user-tasks>
     </div>
   </div>
 </main>

@@ -1,45 +1,35 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TasksApiService} from '../../tasks-api.service';
-import {TaskStore} from '../task.store';
-import {TaskQuery} from '../task.query';
 import {Task} from '../../task.interface';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, switchMap} from 'rxjs/operators';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {doWithLoading} from '../../../../common/custom-operators/do-with-loading';
+import {TaskFacadeService} from '../task-facade.service';
 
 @UntilDestroy()
 @Component({
   selector: 'app-user-tasks',
   templateUrl: './user-tasks.component.html',
   styleUrls: ['./user-tasks.component.scss'],
-  providers: [TaskStore, TaskQuery],
 })
 export class UserTasksComponent implements OnInit {
   private readonly performerId = new BehaviorSubject(null);
 
-  public readonly tasks: Observable<Task[]> = this.taskQuery.selectTasks();
-  public readonly isLoading: Observable<boolean> = this.taskQuery.selectLoading();
+  public readonly tasks: Observable<Task[]> = this.taskService.selectAll();
+  public readonly isLoading: Observable<boolean> = this.taskService.isLoading();
 
   @Input('userId') set userId(value: string) {
     this.performerId.next(value);
   }
 
   constructor(
-    private readonly taskApi: TasksApiService,
-    private readonly taskQuery: TaskQuery,
-    private readonly taskStore: TaskStore,
+    private readonly taskService: TaskFacadeService
   ) {}
 
   ngOnInit(): void {
     this.performerId.pipe(
       filter(user => !!user),
-      switchMap(userId => doWithLoading(this.taskApi.getTasksByUser(userId), this.taskStore)),
+      switchMap(userId => this.taskService.load({ performerId: userId })),
       untilDestroyed(this),
-    ).subscribe({
-      next: tasks => {
-        this.taskStore.update({ tasks });
-      },
-    });
+    ).subscribe();
   }
 }

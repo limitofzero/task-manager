@@ -1,9 +1,15 @@
+import {TaskType} from '../../../../../task-manager-back/src/app/services/task-types/task-type';
+import {Project} from '../../../../../task-manager-back/src/app/services/projects/project';
+import {TaskStatus} from '../../../../../task-manager-back/src/app/services/task-status/task-status';
+import {User} from '../../../../../task-manager-back/src/app/services/user/user.interface';
+
 export interface Task {
-  id: number;
+  id: string;
   title: string;
   description: string;
-  creator_id: string;
-  project_id: string;
-  performer_id: string;
-  status: string;
+  type: TaskType;
+  project: Project;
+  status: TaskStatus;
+  creator: User;
+  performer?: User;
 }

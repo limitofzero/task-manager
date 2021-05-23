@@ -25,8 +25,8 @@ import {
   TuiLoaderModule,
   TuiTextfieldControllerModule
 } from '@taiga-ui/core';
-import {NgxCaptchaModule} from 'ngx-captcha';
-import {CardModule} from '../ui/card/card.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { CardModule } from '../ui/card/card.module';
 
 @NgModule({
   declarations: [
@@ -37,25 +37,25 @@ import {CardModule} from '../ui/card/card.module';
     ForgetPasswordComponent,
     ResetPasswordComponent
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SessionModule,
-    NgxCaptchaModule,
-    CardModule,
-    TuiTabsModule,
-    TuiInputModule,
-    TuiHintControllerModule,
-    TuiTextfieldControllerModule,
-    TuiInputPasswordModule,
-    TuiButtonModule,
-    TuiCheckboxLabeledModule,
-    TuiLinkModule,
-    TuiFieldErrorModule,
-    TuiLoaderModule
-  ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SessionModule,
+        NgxCaptchaModule,
+        CardModule,
+        TuiTabsModule,
+        TuiInputModule,
+        TuiHintControllerModule,
+        TuiTextfieldControllerModule,
+        TuiInputPasswordModule,
+        TuiButtonModule,
+        TuiCheckboxLabeledModule,
+        TuiLinkModule,
+        TuiFieldErrorModule,
+        TuiLoaderModule,
+    ],
   providers: [
     AuthService
   ]

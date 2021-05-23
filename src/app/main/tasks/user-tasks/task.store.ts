@@ -1,14 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Task} from '../task.interface';
-import {guid, Store} from '@datorama/akita';
+import { Injectable } from '@angular/core';
+import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
+import { Task } from '../task.interface';
 
-export interface TaskState {
-  tasks: Task[];
-}
+export interface State extends EntityState<Task, number> {}
 
-@Injectable()
-export class TaskStore extends Store<TaskState> {
+@Injectable({
+  providedIn: 'root'
+})
+@StoreConfig({
+  name: 'tasks'
+})
+export class TaskStore extends EntityStore<State> {
   constructor() {
-    super({ tasks: [] }, { name: `all-user-tasks-${guid()}` });
+    super();
   }
 }

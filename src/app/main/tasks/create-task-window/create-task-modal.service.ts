@@ -5,8 +5,8 @@ import {CreateTaskWindowComponent} from './create-task-window.component';
 import {Observable, of} from 'rxjs';
 import {switchMap} from 'rxjs/operators';
 import {CreateTask} from '../create-task';
-import {TasksApiService} from '../tasks-api.service';
 import {Task} from '../task.interface';
+import {TaskFacadeService} from '../user-tasks/task-facade.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,12 @@ export class CreateTaskModalService {
   constructor(
     private readonly dialogService: TuiDialogService,
     private readonly injector: Injector,
-    private readonly taskApi: TasksApiService,
+    private readonly taskService: TaskFacadeService,
   ) { }
 
   public open(userId: string): Observable<Task> {
     return this.createDialog(userId).pipe(
-      switchMap((task: CreateTask) => task ? this.taskApi.create(task) : of(null))
+      switchMap((task: CreateTask) => task ? this.taskService.add(task) : of(null))
     );
   }
 
