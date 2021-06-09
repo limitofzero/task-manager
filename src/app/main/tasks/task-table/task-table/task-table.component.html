@@ -1,10 +1,12 @@
-<table tuiTable class="tui-table" [columns]="columns">
+<table tuiTable class="tui-table"
+       [sorter]="sorter | async"
+       [columns]="columns">
   <thead>
   <tr tuiThGroup>
     <th *tuiHead="'id'" tuiTh>
-      Key
+      ID
     </th>
-    <th *tuiHead="'title'" tuiTh>Description</th>
+    <th *tuiHead="'title'" tuiTh>Title</th>
   </tr>
   </thead>
   <tbody tuiTbody [data]="tasks">
@@ -14,3 +16,8 @@
   </tr>
   </tbody>
 </table>
+<tui-table-pagination
+  [total]="total"
+  [page]="page"
+  [size]="size"
+></tui-table-pagination>

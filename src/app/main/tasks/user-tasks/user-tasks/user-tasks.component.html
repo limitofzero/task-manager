@@ -1,2 +1,5 @@
-<app-task-table [tasks]="tasks | async">
+<app-task-table
+  [size]="(tableSettings | async)?.size"
+  [page]="(tableSettings | async)?.page"
+  [tasks]="tasks | async">
 </app-task-table>
