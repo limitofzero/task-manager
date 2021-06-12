@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Project} from '../../projects/project';
-import {filter, switchMap} from 'rxjs/operators';
-import {UserProjectsFacadeService} from '../../projects/user-projects/user-projects-facade.service';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Project } from '../../projects/project';
+import { filter, switchMap } from 'rxjs/operators';
+import { UserProjectsFacadeService } from '../../projects/user-projects/user-projects-facade.service';
 
 @Component({
   selector: 'app-project-selector',
@@ -21,14 +21,12 @@ export class ProjectSelectorComponent implements OnInit {
     this.userIdStream.next(value);
   }
 
-  constructor(
-    private readonly userProjects: UserProjectsFacadeService,
-  ) {}
+  constructor(private readonly userProjects: UserProjectsFacadeService) {}
 
   ngOnInit(): void {
     this.projects = this.userIdStream.pipe(
-      filter(id => !!id),
-      switchMap(id => this.userProjects.getProjects(id)),
+      filter((id) => !!id),
+      switchMap((id) => this.userProjects.getProjects(id)),
     );
   }
 }

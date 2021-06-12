@@ -10,32 +10,31 @@ import { BehaviorSubject, Observable } from 'rxjs';
   selector: 'app-confirm-email',
   templateUrl: './confirm-email.component.html',
   styleUrls: ['./confirm-email.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmEmailComponent implements OnInit {
   public token: Observable<string>;
   public readonly loading = new BehaviorSubject<boolean>(true);
   public readonly error = new BehaviorSubject<string | null>(null);
 
-  constructor(
-    private readonly route: ActivatedRoute,
-    private readonly auth: AuthService
-  ) {
+  constructor(private readonly route: ActivatedRoute, private readonly auth: AuthService) {
     this.token = this.route.queryParams.pipe(
-      map(params => params['confirm-token'] as string ?? ''),
+      map((params) => (params['confirm-token'] as string) ?? ''),
       shareReplay(),
     );
   }
 
   public ngOnInit(): void {
-    this.token.pipe(
-      take(1),
-      filter(token => !!token),
-      switchMap(token => this.auth.confirmEmail(token)),
-      finalize(() => this.loading.next(false)),
-      untilDestroyed(this)
-    ).subscribe({
-      error: err => this.error.next(err.error.message)
-    });
+    this.token
+      .pipe(
+        take(1),
+        filter((token) => !!token),
+        switchMap((token) => this.auth.confirmEmail(token)),
+        finalize(() => this.loading.next(false)),
+        untilDestroyed(this),
+      )
+      .subscribe({
+        error: (err) => this.error.next(err.error.message),
+      });
   }
 }

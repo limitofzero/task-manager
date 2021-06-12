@@ -7,10 +7,9 @@ import { AuthUserGuard } from './session/auth-user.guard';
   imports: [
     RouterModule.forRoot([
       { path: '', component: MainComponent, canActivate: [AuthUserGuard] },
-      { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) }
-    ])
+      { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
+    ]),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

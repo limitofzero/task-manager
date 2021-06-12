@@ -10,26 +10,21 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['./reset-password.component.scss'],
 })
 export class ResetPasswordComponent {
   public readonly form: FormGroup;
   public readonly token: Observable<string>;
 
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly route: ActivatedRoute,
-    private readonly authApi: AuthService,
-    private readonly router: Router
-  ) {
+  constructor(private readonly fb: FormBuilder, private readonly route: ActivatedRoute, private readonly authApi: AuthService, private readonly router: Router) {
     this.form = fb.group({
       newPassword: fb.control('', [Validators.required]),
-      repeatNewPassword: fb.control('', [Validators.required])
+      repeatNewPassword: fb.control('', [Validators.required]),
     });
 
     this.token = this.route.queryParams.pipe(
-      map(params => params['reset-password-token'] as string ?? ''),
-      shareReplay()
+      map((params) => (params['reset-password-token'] as string) ?? ''),
+      shareReplay(),
     );
   }
 
@@ -38,12 +33,14 @@ export class ResetPasswordComponent {
       return;
     }
 
-    const form: { newPassword: string, repeatNewPassword: string } = this.form.value;
-    this.token.pipe(
-      take(1),
-      switchMap(token => this.authApi.resetPassword({ ...form, token })),
-      switchMap(() => this.router.navigate(['..'])),
-      untilDestroyed(this)
-    ).subscribe();
+    const form: { newPassword: string; repeatNewPassword: string } = this.form.value;
+    this.token
+      .pipe(
+        take(1),
+        switchMap((token) => this.authApi.resetPassword({ ...form, token })),
+        switchMap(() => this.router.navigate(['..'])),
+        untilDestroyed(this),
+      )
+      .subscribe();
   }
 }

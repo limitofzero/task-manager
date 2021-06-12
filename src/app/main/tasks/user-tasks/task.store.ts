@@ -5,10 +5,10 @@ import { Task } from '../task.interface';
 export interface State extends EntityState<Task, number> {}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 @StoreConfig({
-  name: 'tasks'
+  name: 'tasks',
 })
 export class TaskStore extends EntityStore<State> {
   constructor() {

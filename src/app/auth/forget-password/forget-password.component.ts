@@ -8,18 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './forget-password.component.html',
-  styleUrls: ['./forget-password.component.scss']
+  styleUrls: ['./forget-password.component.scss'],
 })
 export class ForgetPasswordComponent {
   public readonly form: FormGroup;
   public readonly resetPasswordEmail = new BehaviorSubject<string | null>(null);
 
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly auth: AuthService
-  ) {
+  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService) {
     this.form = fb.group({
-      email: fb.control('', [Validators.required, Validators.email])
+      email: fb.control('', [Validators.required, Validators.email]),
     });
   }
 
@@ -29,10 +26,11 @@ export class ForgetPasswordComponent {
     }
 
     const formValue = this.form.value;
-    this.auth.forgetPassword(formValue).pipe(
-      untilDestroyed(this)
-    ).subscribe({
-      next: () => this.resetPasswordEmail.next(formValue.email)
-    });
+    this.auth
+      .forgetPassword(formValue)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: () => this.resetPasswordEmail.next(formValue.email),
+      });
   }
 }

@@ -8,9 +8,8 @@ describe('ExpandedNavElComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExpandedNavElComponent ]
-    })
-    .compileComponents();
+      declarations: [ExpandedNavElComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

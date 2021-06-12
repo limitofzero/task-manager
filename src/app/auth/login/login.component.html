@@ -1,30 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <tui-input formControlName="email"
-             tuiTextfieldExampleText="mail@mail.ru"
-             tuiHintContent="It will be used for sending documents">
-    Email
-  </tui-input>
+  <tui-input formControlName="email" tuiTextfieldExampleText="mail@mail.ru" tuiHintContent="It will be used for sending documents"> Email </tui-input>
   <tui-field-error formControlName="email"></tui-field-error>
   <p>
-    <tui-input-password formControlName="password">
-      Password
-    </tui-input-password>
+    <tui-input-password formControlName="password"> Password </tui-input-password>
     <tui-field-error formControlName="password"></tui-field-error>
   </p>
   <a tuiLink routerLink="../forget-password">Forget password</a>
   <p>
-    <tui-checkbox-labeled formControlName="rememberMe" size="l">
-      Remember me
-    </tui-checkbox-labeled>
+    <tui-checkbox-labeled formControlName="rememberMe" size="l"> Remember me </tui-checkbox-labeled>
   </p>
-  <tui-loader
-    [showLoader]="isLoading | async"
-    [inheritColor]="true"
-    [overlay]="true"
-  >
-    <button class="width-100" tuiButton type="submit">
-      Sign in
-    </button>
+  <tui-loader [showLoader]="isLoading | async" [inheritColor]="true" [overlay]="true">
+    <button class="width-100" tuiButton type="submit">Sign in</button>
   </tui-loader>
-
 </form>

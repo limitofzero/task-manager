@@ -8,30 +8,25 @@ import { BehaviorSubject, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TuiNotificationsService } from '@taiga-ui/core';
 import { catchError, switchMapTo } from 'rxjs/operators';
-import {doWithLoading} from '../../common/custom-operators/do-with-loading';
+import { doWithLoading } from '../../common/custom-operators/do-with-loading';
 
 @UntilDestroy()
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   public readonly form: FormGroup;
   public readonly captchaKey = environment.recaptchaKey;
   public readonly isLoading = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly auth: AuthService,
-    private readonly router: Router,
-    private readonly notification: TuiNotificationsService
-  ) {
+  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService, private readonly router: Router, private readonly notification: TuiNotificationsService) {
     this.form = fb.group({
       email: fb.control('', [Validators.required, Validators.email]),
       username: fb.control('', [Validators.required]),
       password: fb.control('', [Validators.required]),
-      recaptcha: fb.control('', [Validators.required])
+      recaptcha: fb.control('', [Validators.required]),
     });
   }
 
@@ -40,18 +35,18 @@ export class RegisterComponent {
       return;
     }
 
-    doWithLoading(this.auth.signUp(this.form.value), this.isLoading).pipe(
-      catchError((err: HttpErrorResponse) => {
-        return this.notification.show(err.error.message ?? err.message).pipe(
-          switchMapTo(throwError(err))
-        );
-      }),
-      untilDestroyed(this)
-    ).subscribe({
-      next: () => {
-        this.notification.show('You was registered').subscribe();
-        this.router.navigate(['..']);
-      },
-    });
+    doWithLoading(this.auth.signUp(this.form.value), this.isLoading)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          return this.notification.show(err.error.message ?? err.message).pipe(switchMapTo(throwError(err)));
+        }),
+        untilDestroyed(this),
+      )
+      .subscribe({
+        next: () => {
+          this.notification.show('You was registered').subscribe();
+          this.router.navigate(['..']);
+        },
+      });
   }
 }

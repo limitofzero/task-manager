@@ -7,14 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './main/main.module';
 import { SessionModule } from './session/session.module';
-import {iconsPathFactory, TUI_ICONS_PATH, TuiDialogModule, TuiNotificationsModule, TuiRootModule} from '@taiga-ui/core';
+import { iconsPathFactory, TUI_ICONS_PATH, TuiDialogModule, TuiNotificationsModule, TuiRootModule } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
-import {persistState} from '@datorama/akita';
-import {CreateTaskWindowModule} from './main/tasks/create-task-window/create-task-window.module';
+import { persistState } from '@datorama/akita';
+import { CreateTaskWindowModule } from './main/tasks/create-task-window/create-task-window.module';
 
 export const sessionStorage = persistState({
   include: ['session'],
-  key: 'token'
+  key: 'token',
 });
 
 @NgModule({
@@ -33,20 +33,21 @@ export const sessionStorage = persistState({
   ],
   providers: [
     {
-      provide: 'sessionStorage', useValue: sessionStorage
+      provide: 'sessionStorage',
+      useValue: sessionStorage,
     },
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {
         required: 'Field is required',
-        email: 'This field is not containing email'
-      }
+        email: 'This field is not containing email',
+      },
     },
     {
       provide: TUI_ICONS_PATH,
-      useValue: iconsPathFactory('assets/taiga-ui/icons/')
-    }
+      useValue: iconsPathFactory('assets/taiga-ui/icons/'),
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

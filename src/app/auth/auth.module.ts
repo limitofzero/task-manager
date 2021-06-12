@@ -11,54 +11,32 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-import {
-  TuiCheckboxLabeledModule,
-  TuiFieldErrorModule,
-  TuiInputModule,
-  TuiInputPasswordModule,
-  TuiTabsModule
-} from '@taiga-ui/kit';
-import {
-  TuiButtonModule,
-  TuiHintControllerModule,
-  TuiLinkModule,
-  TuiLoaderModule,
-  TuiTextfieldControllerModule
-} from '@taiga-ui/core';
+import { TuiCheckboxLabeledModule, TuiFieldErrorModule, TuiInputModule, TuiInputPasswordModule, TuiTabsModule } from '@taiga-ui/kit';
+import { TuiButtonModule, TuiHintControllerModule, TuiLinkModule, TuiLoaderModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { CardModule } from '../ui/card/card.module';
 
 @NgModule({
-  declarations: [
-    AuthFormComponent,
-    LoginComponent,
-    RegisterComponent,
-    ConfirmEmailComponent,
-    ForgetPasswordComponent,
-    ResetPasswordComponent
+  declarations: [AuthFormComponent, LoginComponent, RegisterComponent, ConfirmEmailComponent, ForgetPasswordComponent, ResetPasswordComponent],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SessionModule,
+    NgxCaptchaModule,
+    CardModule,
+    TuiTabsModule,
+    TuiInputModule,
+    TuiHintControllerModule,
+    TuiTextfieldControllerModule,
+    TuiInputPasswordModule,
+    TuiButtonModule,
+    TuiCheckboxLabeledModule,
+    TuiLinkModule,
+    TuiFieldErrorModule,
+    TuiLoaderModule,
   ],
-    imports: [
-        CommonModule,
-        AuthRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SessionModule,
-        NgxCaptchaModule,
-        CardModule,
-        TuiTabsModule,
-        TuiInputModule,
-        TuiHintControllerModule,
-        TuiTextfieldControllerModule,
-        TuiInputPasswordModule,
-        TuiButtonModule,
-        TuiCheckboxLabeledModule,
-        TuiLinkModule,
-        TuiFieldErrorModule,
-        TuiLoaderModule,
-    ],
-  providers: [
-    AuthService
-  ]
+  providers: [AuthService],
 })
-export class AuthModule {
-}
+export class AuthModule {}

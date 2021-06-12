@@ -1,22 +1,15 @@
-<table tuiTable class="tui-table"
-       [columns]="columns">
+<table tuiTable class="tui-table" [columns]="columns">
   <thead>
-  <tr tuiThGroup>
-    <th *tuiHead="'id'" tuiTh>
-      ID
-    </th>
-    <th *tuiHead="'title'" tuiTh>Title</th>
-  </tr>
+    <tr tuiThGroup>
+      <th *tuiHead="'id'" tuiTh>ID</th>
+      <th *tuiHead="'title'" tuiTh>Title</th>
+    </tr>
   </thead>
   <tbody tuiTbody [data]="tasks">
-  <tr *tuiRow="let task of tasks;" tuiTr>
-    <td *tuiCell="'id'" tuiTd>{{ task.id }}</td>
-    <td *tuiCell="'title'" tuiTd>{{ task.title }}</td>
-  </tr>
+    <tr *tuiRow="let task of tasks" tuiTr>
+      <td *tuiCell="'id'" tuiTd>{{ task.id }}</td>
+      <td *tuiCell="'title'" tuiTd>{{ task.title }}</td>
+    </tr>
   </tbody>
 </table>
-<tui-table-pagination
-  [total]="total"
-  [page]="page"
-  [size]="size"
-></tui-table-pagination>
+<tui-table-pagination [total]="total" [page]="page" [size]="size"></tui-table-pagination>

@@ -1,7 +1,7 @@
 <div class="group" (click)="toggle()">
   <ng-content></ng-content>
 
-  <ng-container *ngIf="(expanded | async); else closed">
+  <ng-container *ngIf="expanded | async; else closed">
     <tui-svg class="icon" src="tuiIconChevronUpLarge"></tui-svg>
   </ng-container>
 

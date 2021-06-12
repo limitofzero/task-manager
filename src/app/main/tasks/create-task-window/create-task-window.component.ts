@@ -1,25 +1,25 @@
-import {Component, OnInit, ChangeDetectionStrategy, Inject} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserProjectsFacadeService} from '../../projects/user-projects/user-projects-facade.service';
-import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
-import {TuiDialogContext} from '@taiga-ui/core';
-import {Observable, of} from 'rxjs';
-import {Project} from '../../projects/project';
-import {TaskType} from '../../task-types/task-type';
-import {TaskTypeFacadeService} from '../../task-types/task-type-facade.service';
-import {User} from '../../../session/user';
-import {shareReplay, startWith, switchMap} from 'rxjs/operators';
-import {UsersApiService} from '../../users/users-api.service';
-import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {CreateTask} from '../create-task';
+import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserProjectsFacadeService } from '../../projects/user-projects/user-projects-facade.service';
+import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext } from '@taiga-ui/core';
+import { Observable, of } from 'rxjs';
+import { Project } from '../../projects/project';
+import { TaskType } from '../../task-types/task-type';
+import { TaskTypeFacadeService } from '../../task-types/task-type-facade.service';
+import { User } from '../../../session/user';
+import { shareReplay, startWith, switchMap } from 'rxjs/operators';
+import { UsersApiService } from '../../users/users-api.service';
+import { TuiContextWithImplicit, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CreateTask } from '../create-task';
 
 @UntilDestroy()
 @Component({
   selector: 'app-create-task-window',
   templateUrl: './create-task-window.component.html',
   styleUrls: ['./create-task-window.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTaskWindowComponent implements OnInit {
   private readonly userId: string;
@@ -35,7 +35,7 @@ export class CreateTaskWindowComponent implements OnInit {
     private readonly taskTypesService: TaskTypeFacadeService,
     private readonly usersApi: UsersApiService,
     @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<CreateTask>
+    private readonly context: TuiDialogContext<CreateTask>,
   ) {
     this.userId = (this.context.data as { userId: string }).userId;
     this.projects = this.userProjectsService.getProjects(this.userId);
@@ -46,20 +46,20 @@ export class CreateTaskWindowComponent implements OnInit {
 
   public ngOnInit(): void {
     const projectControl = this.form.get('projectId');
-    this.form.get('projectId').valueChanges.pipe(
-      startWith(projectControl.value),
-      untilDestroyed(this),
-    ).subscribe({
-      next: value => {
-        this.performerControl.setValue(null);
+    this.form
+      .get('projectId')
+      .valueChanges.pipe(startWith(projectControl.value), untilDestroyed(this))
+      .subscribe({
+        next: (value) => {
+          this.performerControl.setValue(null);
 
-        if (value) {
-          this.performerControl.enable();
-        } else {
-          this.performerControl.disable();
-        }
-      }
-    });
+          if (value) {
+            this.performerControl.enable();
+          } else {
+            this.performerControl.disable();
+          }
+        },
+      });
   }
 
   public get performerControl(): FormControl {
@@ -79,8 +79,7 @@ export class CreateTaskWindowComponent implements OnInit {
   }
 
   public assignMe(): void {
-    this.form.get('performerId')
-      .setValue(this.userId);
+    this.form.get('performerId').setValue(this.userId);
   }
 
   private createForm(): FormGroup {
@@ -106,23 +105,19 @@ export class CreateTaskWindowComponent implements OnInit {
       shareReplay({
         refCount: true,
         bufferSize: 1,
-      })
+      }),
     );
   }
 
   @tuiPure
-  stringify(
-    items: ReadonlyArray<Record<string, any>>,
-    idProp: string,
-    labelProp: string
-  ): TuiStringHandler<TuiContextWithImplicit<number | string>> {
+  stringify(items: ReadonlyArray<Record<string, any>>, idProp: string, labelProp: string): TuiStringHandler<TuiContextWithImplicit<number | string>> {
     if (!items) {
       return null;
     }
 
-    const map = new Map(items.map(item => [item[idProp], item[labelProp]]));
+    const map = new Map(items.map((item) => [item[idProp], item[labelProp]]));
 
-    return ({$implicit}: TuiContextWithImplicit<number>) => {
+    return ({ $implicit }: TuiContextWithImplicit<number>) => {
       return map.get($implicit) || '';
     };
   }

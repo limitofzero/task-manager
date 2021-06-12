@@ -7,15 +7,7 @@ import { CardTitleTextComponent } from './card-title-text/card-title-text.compon
 
 @NgModule({
   declarations: [CardComponent, CardContentComponent, CardTitleComponent, CardTitleTextComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    CardComponent,
-    CardContentComponent,
-    CardTitleComponent,
-    CardTitleTextComponent
-  ]
+  imports: [CommonModule],
+  exports: [CardComponent, CardContentComponent, CardTitleComponent, CardTitleTextComponent],
 })
-export class CardModule {
-}
+export class CardModule {}

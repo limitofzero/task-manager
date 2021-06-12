@@ -11,25 +11,25 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   imports: [
     RouterModule.forChild([
       {
-        path: '', component: AuthFormComponent,
+        path: '',
+        component: AuthFormComponent,
         children: [
           { path: 'sign-in', component: LoginComponent },
           { path: 'sign-up', component: RegisterComponent },
           { path: 'forget-password', component: ForgetPasswordComponent },
-          { path: '', redirectTo: 'sign-in', pathMatch: 'full' }
-        ]
+          { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
+        ],
       },
       {
         path: 'confirm-email',
-        component: ConfirmEmailComponent
+        component: ConfirmEmailComponent,
       },
       {
         path: 'reset-password',
-        component: ResetPasswordComponent
-      }
-    ])
+        component: ResetPasswordComponent,
+      },
+    ]),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule {
-}
+export class AuthRoutingModule {}
