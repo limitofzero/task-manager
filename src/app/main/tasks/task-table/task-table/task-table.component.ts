@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Task} from '../../task.interface';
 
 @Component({
@@ -7,7 +7,7 @@ import {Task} from '../../task.interface';
   styleUrls: ['./task-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskTableComponent implements OnInit {
+export class TaskTableComponent {
   public readonly columns = ['id', 'title'];
 
   @Input() tasks: Task[] = [];
@@ -17,8 +17,4 @@ export class TaskTableComponent implements OnInit {
 
   @Output() pageChanged = new EventEmitter<number>();
   @Output() pageSizeChanged = new EventEmitter<number>();
-
-  public ngOnInit(): void {
-
-  }
 }

@@ -17,7 +17,7 @@ export class ProjectSelectorComponent implements OnInit {
 
   private readonly userIdStream = new BehaviorSubject<string>(null);
 
-  @Input('userId') set userId(value: string) {
+  @Input() set userId(value: string) {
     this.userIdStream.next(value);
   }
 

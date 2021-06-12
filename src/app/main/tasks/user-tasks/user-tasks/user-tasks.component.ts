@@ -26,7 +26,7 @@ export class UserTasksComponent implements OnInit {
 
   @ViewChild(TaskTableComponent, {static: true}) taskTable: TaskTableComponent;
 
-  @Input('userId') set userId(value: string) {
+  @Input() set userId(value: string) {
     this.performerId.next(value);
   }
 
