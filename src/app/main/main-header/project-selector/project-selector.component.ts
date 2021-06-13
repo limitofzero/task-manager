@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Project } from '../../projects/project';
+import { ProjectInterface } from '../../projects/project.interface';
 import { filter, switchMap } from 'rxjs/operators';
 import { UserProjectsFacadeService } from '../../projects/user-projects/user-projects-facade.service';
 
@@ -13,7 +13,7 @@ import { UserProjectsFacadeService } from '../../projects/user-projects/user-pro
 })
 export class ProjectSelectorComponent implements OnInit {
   public readonly projectControl = new FormControl('');
-  public projects: Observable<Project[]>;
+  public projects: Observable<ProjectInterface[]>;
 
   private readonly userIdStream = new BehaviorSubject<string>(null);
 

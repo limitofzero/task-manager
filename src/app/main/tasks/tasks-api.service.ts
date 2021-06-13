@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Task } from './task.interface';
 import { Observable } from 'rxjs';
-import { CreateTask } from './create-task';
+import { CreateTaskInterface } from './create-task.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class TasksApiService {
     return this.http.get<Task[]>(`api/tasks`, { params });
   }
 
-  public create(task: CreateTask): Observable<Task> {
+  public create(task: CreateTaskInterface): Observable<Task> {
     return this.http.post<Task>('api/tasks', task);
   }
 }

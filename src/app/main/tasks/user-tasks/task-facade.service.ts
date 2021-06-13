@@ -5,7 +5,7 @@ import { TaskQuery } from './task.query';
 import { Observable, Subject } from 'rxjs';
 import { mapTo, startWith, switchMapTo, tap } from 'rxjs/operators';
 import { setLoading } from '@datorama/akita';
-import { CreateTask } from '../create-task';
+import { CreateTaskInterface } from '../create-task.interface';
 import { Task } from '../task.interface';
 
 @Injectable({
@@ -26,7 +26,7 @@ export class TaskFacadeService {
     );
   }
 
-  public add(task: CreateTask): Observable<Task> {
+  public add(task: CreateTaskInterface): Observable<Task> {
     return this.api.create(task).pipe(tap(() => this.reupdate.next()));
   }
 

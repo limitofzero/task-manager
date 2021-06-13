@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Project } from '../project';
+import { ProjectInterface } from '../project.interface';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 
-export interface State extends EntityState<Project, string> {}
+export interface State extends EntityState<ProjectInterface, string> {}
 
 @Injectable({
   providedIn: 'root',

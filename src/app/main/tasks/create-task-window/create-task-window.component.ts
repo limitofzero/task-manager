@@ -4,15 +4,15 @@ import { UserProjectsFacadeService } from '../../projects/user-projects/user-pro
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { Observable, of } from 'rxjs';
-import { Project } from '../../projects/project';
-import { TaskType } from '../../task-types/task-type';
+import { ProjectInterface } from '../../projects/project.interface';
+import { TaskTypeInterface } from '../../task-types/task-type.interface';
 import { TaskTypeFacadeService } from '../../task-types/task-type-facade.service';
 import { User } from '../../../session/user';
 import { shareReplay, startWith, switchMap } from 'rxjs/operators';
 import { UsersApiService } from '../../users/users-api.service';
 import { TuiContextWithImplicit, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CreateTask } from '../create-task';
+import { CreateTaskInterface } from '../create-task.interface';
 
 @UntilDestroy()
 @Component({
@@ -25,8 +25,8 @@ export class CreateTaskWindowComponent implements OnInit {
   private readonly userId: string;
 
   public readonly form: FormGroup;
-  public readonly projects: Observable<Project[]>;
-  public readonly taskTypes: Observable<TaskType[]>;
+  public readonly projects: Observable<ProjectInterface[]>;
+  public readonly taskTypes: Observable<TaskTypeInterface[]>;
   public readonly users: Observable<User[]>;
 
   constructor(
@@ -35,7 +35,7 @@ export class CreateTaskWindowComponent implements OnInit {
     private readonly taskTypesService: TaskTypeFacadeService,
     private readonly usersApi: UsersApiService,
     @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<CreateTask>,
+    private readonly context: TuiDialogContext<CreateTaskInterface>,
   ) {
     this.userId = (this.context.data as { userId: string }).userId;
     this.projects = this.userProjectsService.getProjects(this.userId);

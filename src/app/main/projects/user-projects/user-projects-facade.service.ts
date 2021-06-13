@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProjectsApiService } from '../projects-api.service';
 import { Observable } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
-import { Project } from '../project';
+import { ProjectInterface } from '../project.interface';
 import { UserProjectsQuery } from './user-projects.query';
 import { UserProjectsStore } from './user-projects.store';
 
@@ -16,7 +16,7 @@ export class UserProjectsFacadeService {
     return this.query.selectLoading();
   }
 
-  public getProjects(userId: string): Observable<Project[]> {
+  public getProjects(userId: string): Observable<ProjectInterface[]> {
     const request = this.api.getProjectsByUserId(userId).pipe(
       tap(() => this.state.setLoading(true)),
       tap((projects) => this.state.set(projects)),

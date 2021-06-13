@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Project } from './project';
+import { ProjectInterface } from './project.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { Project } from './project';
 export class ProjectsApiService {
   constructor(private readonly http: HttpClient) {}
 
-  public getProjectsByUserId(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`api/projects?userId=${userId}`);
+  public getProjectsByUserId(userId: string): Observable<ProjectInterface[]> {
+    return this.http.get<ProjectInterface[]>(`api/projects?userId=${userId}`);
   }
 }
