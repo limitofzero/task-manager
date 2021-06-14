@@ -10,7 +10,11 @@ import { TaskTypeInterface } from './task-type.interface';
   providedIn: 'root',
 })
 export class TaskTypeFacadeService {
-  constructor(private readonly api: TaskTypeApiService, private readonly state: TaskTypeStore, private readonly query: TaskTypeQuery) {}
+  constructor(
+    private readonly api: TaskTypeApiService,
+    private readonly state: TaskTypeStore,
+    private readonly query: TaskTypeQuery,
+  ) {}
 
   public getTaskTypes(): Observable<TaskTypeInterface[]> {
     const request = this.api.getTaskTypes().pipe(
@@ -19,7 +23,9 @@ export class TaskTypeFacadeService {
       finalize(() => this.state.setLoading(false)),
     );
 
-    return this.query.selectHasCache().pipe(switchMap((hasCache) => (hasCache ? this.query.selectAll() : request)));
+    return this.query
+      .selectHasCache()
+      .pipe(switchMap((hasCache) => (hasCache ? this.query.selectAll() : request)));
   }
 
   public isLoading(): Observable<boolean> {

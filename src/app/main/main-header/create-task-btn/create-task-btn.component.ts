@@ -15,13 +15,18 @@ import { of } from 'rxjs';
 export class CreateTaskBtnComponent {
   @Input() userId: string;
 
-  constructor(private readonly createTaskService: CreateTaskModalService, private readonly notification: TuiNotificationsService) {}
+  constructor(
+    private readonly createTaskService: CreateTaskModalService,
+    private readonly notification: TuiNotificationsService,
+  ) {}
 
   public createTask(): void {
     this.createTaskService
       .open(this.userId)
       .pipe(
-        switchMap((result) => (result ? this.notification.show(`Task '${result.title}' was created`) : of(null))),
+        switchMap((result) =>
+          result ? this.notification.show(`Task '${result.title}' was created`) : of(null),
+        ),
         catchError((err) => this.notification.show(err.message)),
         untilDestroyed(this),
       )

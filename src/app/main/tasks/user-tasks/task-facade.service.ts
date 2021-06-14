@@ -14,7 +14,11 @@ import { Task } from '../task.interface';
 export class TaskFacadeService {
   private readonly reupdate = new Subject<void>();
 
-  constructor(private readonly api: TasksApiService, private readonly store: TaskStore, private readonly query: TaskQuery) {}
+  constructor(
+    private readonly api: TasksApiService,
+    private readonly store: TaskStore,
+    private readonly query: TaskQuery,
+  ) {}
 
   public load(params: { performerId?: string } = {}): Observable<void> {
     return this.reupdate.pipe(

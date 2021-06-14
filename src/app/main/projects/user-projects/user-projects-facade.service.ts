@@ -10,7 +10,11 @@ import { UserProjectsStore } from './user-projects.store';
   providedIn: 'root',
 })
 export class UserProjectsFacadeService {
-  constructor(private readonly api: ProjectsApiService, private readonly query: UserProjectsQuery, private readonly state: UserProjectsStore) {}
+  constructor(
+    private readonly api: ProjectsApiService,
+    private readonly query: UserProjectsQuery,
+    private readonly state: UserProjectsStore,
+  ) {}
 
   public isLoading(): Observable<boolean> {
     return this.query.selectLoading();
@@ -23,6 +27,8 @@ export class UserProjectsFacadeService {
       finalize(() => this.state.setLoading(false)),
     );
 
-    return this.query.selectHasCache().pipe(switchMap((hasCache) => (hasCache ? this.query.selectAll() : request)));
+    return this.query
+      .selectHasCache()
+      .pipe(switchMap((hasCache) => (hasCache ? this.query.selectAll() : request)));
   }
 }

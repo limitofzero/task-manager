@@ -46,7 +46,10 @@ export class UserTasksComponent implements OnInit {
   }
 
   private getTableSettings(): Observable<TableSettings> {
-    return combineLatest([this.taskTable.pageChanged.asObservable(), this.taskTable.pageSizeChanged.asObservable()]).pipe(
+    return combineLatest([
+      this.taskTable.pageChanged.asObservable(),
+      this.taskTable.pageSizeChanged.asObservable(),
+    ]).pipe(
       startWith([0, 10] as [number, number]),
       map(([page, size]) => ({
         page,

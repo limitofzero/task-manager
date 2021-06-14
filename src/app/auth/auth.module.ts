@@ -11,13 +11,32 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-import { TuiCheckboxLabeledModule, TuiFieldErrorModule, TuiInputModule, TuiInputPasswordModule, TuiTabsModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiHintControllerModule, TuiLinkModule, TuiLoaderModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import {
+  TuiCheckboxLabeledModule,
+  TuiFieldErrorModule,
+  TuiInputModule,
+  TuiInputPasswordModule,
+  TuiTabsModule,
+} from '@taiga-ui/kit';
+import {
+  TuiButtonModule,
+  TuiHintControllerModule,
+  TuiLinkModule,
+  TuiLoaderModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { CardModule } from '../ui/card/card.module';
 
 @NgModule({
-  declarations: [AuthFormComponent, LoginComponent, RegisterComponent, ConfirmEmailComponent, ForgetPasswordComponent, ResetPasswordComponent],
+  declarations: [
+    AuthFormComponent,
+    LoginComponent,
+    RegisterComponent,
+    ConfirmEmailComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,

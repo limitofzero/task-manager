@@ -16,7 +16,12 @@ export class ResetPasswordComponent {
   public readonly form: FormGroup;
   public readonly token: Observable<string>;
 
-  constructor(private readonly fb: FormBuilder, private readonly route: ActivatedRoute, private readonly authApi: AuthService, private readonly router: Router) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly route: ActivatedRoute,
+    private readonly authApi: AuthService,
+    private readonly router: Router,
+  ) {
     this.form = fb.group({
       newPassword: fb.control('', [Validators.required]),
       repeatNewPassword: fb.control('', [Validators.required]),

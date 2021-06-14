@@ -39,9 +39,18 @@
 
   <hr class="tui-space_bottom-3" />
 
-  <tui-input class="tui-space_bottom-3" tuiTextfieldSize="m" formControlName="title" [tuiTextfieldLabelOutside]="true"> Title </tui-input>
+  <tui-input
+    class="tui-space_bottom-3"
+    tuiTextfieldSize="m"
+    formControlName="title"
+    [tuiTextfieldLabelOutside]="true"
+  >
+    Title
+  </tui-input>
 
-  <tui-text-area class="description tui-space_bottom-3" formControlName="description"> Description </tui-text-area>
+  <tui-text-area class="description tui-space_bottom-3" formControlName="description">
+    Description
+  </tui-text-area>
 
   <div class="performer">
     <tui-select
@@ -63,11 +72,22 @@
       </ng-template>
     </tui-select>
 
-    <button tuiIconButton class="tui-space_left-1" size="m" tuiHint="Assign me" tuiHintDirection="right" (click)="assignMe()" [disabled]="!form.get('projectId').value" icon="tuiIconUser"></button>
+    <button
+      tuiIconButton
+      class="tui-space_left-1"
+      size="m"
+      tuiHint="Assign me"
+      tuiHintDirection="right"
+      (click)="assignMe()"
+      [disabled]="!form.get('projectId').value"
+      icon="tuiIconUser"
+    ></button>
   </div>
 
   <div class="buttons">
     <button tuiButton appearance="flat">Cancel</button>
-    <button type="submit" tuiButton class="tui-space_left-1" [disabled]="form.invalid">Create</button>
+    <button type="submit" tuiButton class="tui-space_left-1" [disabled]="form.invalid">
+      Create
+    </button>
   </div>
 </form>

@@ -21,7 +21,12 @@ export class RegisterComponent {
   public readonly captchaKey = environment.recaptchaKey;
   public readonly isLoading = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService, private readonly router: Router, private readonly notification: TuiNotificationsService) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly auth: AuthService,
+    private readonly router: Router,
+    private readonly notification: TuiNotificationsService,
+  ) {
     this.form = fb.group({
       email: fb.control('', [Validators.required, Validators.email]),
       username: fb.control('', [Validators.required]),
@@ -38,7 +43,9 @@ export class RegisterComponent {
     doWithLoading(this.auth.signUp(this.form.value), this.isLoading)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          return this.notification.show(err.error.message ?? err.message).pipe(switchMapTo(throwError(err)));
+          return this.notification
+            .show(err.error.message ?? err.message)
+            .pipe(switchMapTo(throwError(err)));
         }),
         untilDestroyed(this),
       )

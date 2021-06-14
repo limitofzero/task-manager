@@ -7,7 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MainModule } from './main/main.module';
 import { SessionModule } from './session/session.module';
-import { iconsPathFactory, TUI_ICONS_PATH, TuiDialogModule, TuiNotificationsModule, TuiRootModule } from '@taiga-ui/core';
+import {
+  iconsPathFactory,
+  TUI_ICONS_PATH,
+  TuiDialogModule,
+  TuiNotificationsModule,
+  TuiRootModule,
+} from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { persistState } from '@datorama/akita';
 import { CreateTaskWindowModule } from './main/tasks/create-task-window/create-task-window.module';

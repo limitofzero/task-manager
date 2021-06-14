@@ -110,7 +110,11 @@ export class CreateTaskWindowComponent implements OnInit {
   }
 
   @tuiPure
-  stringify(items: ReadonlyArray<Record<string, any>>, idProp: string, labelProp: string): TuiStringHandler<TuiContextWithImplicit<number | string>> {
+  stringify(
+    items: ReadonlyArray<Record<string, any>>,
+    idProp: string,
+    labelProp: string,
+  ): TuiStringHandler<TuiContextWithImplicit<number | string>> {
     if (!items) {
       return null;
     }
