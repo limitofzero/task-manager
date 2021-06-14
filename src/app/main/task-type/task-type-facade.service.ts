@@ -4,7 +4,7 @@ import { TaskTypeStore } from './task-type.store';
 import { TaskTypeQuery } from './task-type.query';
 import { Observable } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
-import { TaskTypeInterface } from './task-type.interface';
+import { TaskType } from './task-type.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class TaskTypeFacadeService {
     private readonly query: TaskTypeQuery,
   ) {}
 
-  public getTaskTypes(): Observable<TaskTypeInterface[]> {
+  public getTaskTypes(): Observable<TaskType[]> {
     const request = this.api.getTaskTypes().pipe(
       tap(() => this.state.setLoading(true)),
       tap((projects) => this.state.set(projects)),

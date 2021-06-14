@@ -1,4 +1,4 @@
-export interface CreateTaskInterface {
+export interface CreateTask {
   title: string;
   description: string;
   creatorId: string;

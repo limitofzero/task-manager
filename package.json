@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "lint:fix": "ng lint",
     "e2e": "ng e2e",
-    "prettier": "prettier --write ."
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "private": true,
   "dependencies": {

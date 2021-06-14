@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { TasksApiService } from '../tasks-api.service';
+import { TaskApiService } from '../task-api.service';
 import { TaskStore } from './task.store';
 import { TaskQuery } from './task.query';
 import { Observable, Subject } from 'rxjs';
 import { mapTo, startWith, switchMapTo, tap } from 'rxjs/operators';
 import { setLoading } from '@datorama/akita';
-import { CreateTaskInterface } from '../create-task.interface';
+import { CreateTask } from '../create-task.interface';
 import { Task } from '../task.interface';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class TaskFacadeService {
   private readonly reupdate = new Subject<void>();
 
   constructor(
-    private readonly api: TasksApiService,
+    private readonly api: TaskApiService,
     private readonly store: TaskStore,
     private readonly query: TaskQuery,
   ) {}
@@ -30,7 +30,7 @@ export class TaskFacadeService {
     );
   }
 
-  public add(task: CreateTaskInterface): Observable<Task> {
+  public add(task: CreateTask): Observable<Task> {
     return this.api.create(task).pipe(tap(() => this.reupdate.next()));
   }
 

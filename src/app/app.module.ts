@@ -16,7 +16,7 @@ import {
 } from '@taiga-ui/core';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 import { persistState } from '@datorama/akita';
-import { CreateTaskWindowModule } from './main/tasks/create-task-window/create-task-window.module';
+import { CreateTaskWindowModule } from './main/task/create-task-window/create-task-window.module';
 
 export const sessionStorage = persistState({
   include: ['session'],

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ProjectsApiService } from '../projects-api.service';
+import { ProjectApiService } from '../project-api.service';
 import { Observable } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
-import { ProjectInterface } from '../project.interface';
+import { Project } from '../project.interface';
 import { UserProjectsQuery } from './user-projects.query';
 import { UserProjectsStore } from './user-projects.store';
 
@@ -11,7 +11,7 @@ import { UserProjectsStore } from './user-projects.store';
 })
 export class UserProjectsFacadeService {
   constructor(
-    private readonly api: ProjectsApiService,
+    private readonly api: ProjectApiService,
     private readonly query: UserProjectsQuery,
     private readonly state: UserProjectsStore,
   ) {}
@@ -20,7 +20,7 @@ export class UserProjectsFacadeService {
     return this.query.selectLoading();
   }
 
-  public getProjects(userId: string): Observable<ProjectInterface[]> {
+  public getProjects(userId: string): Observable<Project[]> {
     const request = this.api.getProjectsByUserId(userId).pipe(
       tap(() => this.state.setLoading(true)),
       tap((projects) => this.state.set(projects)),

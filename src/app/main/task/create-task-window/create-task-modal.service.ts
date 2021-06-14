@@ -4,7 +4,7 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { CreateTaskWindowComponent } from './create-task-window.component';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { CreateTaskInterface } from '../create-task.interface';
+import { CreateTask } from '../create-task.interface';
 import { Task } from '../task.interface';
 import { TaskFacadeService } from '../user-tasks/task-facade.service';
 
@@ -20,7 +20,7 @@ export class CreateTaskModalService {
 
   public open(userId: string): Observable<Task> {
     return this.createDialog(userId).pipe(
-      switchMap((task: CreateTaskInterface) => (task ? this.taskService.add(task) : of(null))),
+      switchMap((task: CreateTask) => (task ? this.taskService.add(task) : of(null))),
     );
   }
 

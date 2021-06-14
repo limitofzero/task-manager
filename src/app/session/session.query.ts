@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import { User } from './user';
+import { User } from './user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SessionQuery extends Query<SessionState> {

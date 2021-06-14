@@ -1,18 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserProjectsFacadeService } from '../../projects/user-projects/user-projects-facade.service';
+import { UserProjectsFacadeService } from '../../project/user-projects/user-projects-facade.service';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
 import { Observable, of } from 'rxjs';
-import { ProjectInterface } from '../../projects/project.interface';
-import { TaskTypeInterface } from '../../task-types/task-type.interface';
-import { TaskTypeFacadeService } from '../../task-types/task-type-facade.service';
-import { User } from '../../../session/user';
+import { Project } from '../../project/project.interface';
+import { TaskType } from '../../task-type/task-type.interface';
+import { TaskTypeFacadeService } from '../../task-type/task-type-facade.service';
+import { User } from '../../../session/user.interface';
 import { shareReplay, startWith, switchMap } from 'rxjs/operators';
-import { UsersApiService } from '../../users/users-api.service';
+import { UserApiService } from '../../user/user-api.service';
 import { TuiContextWithImplicit, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CreateTaskInterface } from '../create-task.interface';
+import { CreateTask } from '../create-task.interface';
 
 @UntilDestroy()
 @Component({
@@ -25,17 +25,17 @@ export class CreateTaskWindowComponent implements OnInit {
   private readonly userId: string;
 
   public readonly form: FormGroup;
-  public readonly projects: Observable<ProjectInterface[]>;
-  public readonly taskTypes: Observable<TaskTypeInterface[]>;
+  public readonly projects: Observable<Project[]>;
+  public readonly taskTypes: Observable<TaskType[]>;
   public readonly users: Observable<User[]>;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly userProjectsService: UserProjectsFacadeService,
     private readonly taskTypesService: TaskTypeFacadeService,
-    private readonly usersApi: UsersApiService,
+    private readonly usersApi: UserApiService,
     @Inject(POLYMORPHEUS_CONTEXT)
-    private readonly context: TuiDialogContext<CreateTaskInterface>,
+    private readonly context: TuiDialogContext<CreateTask>,
   ) {
     this.userId = (this.context.data as { userId: string }).userId;
     this.projects = this.userProjectsService.getProjects(this.userId);

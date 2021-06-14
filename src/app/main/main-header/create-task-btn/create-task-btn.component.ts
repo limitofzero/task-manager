@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { CreateTaskModalService } from '../../tasks/create-task-window/create-task-modal.service';
+import { CreateTaskModalService } from '../../task/create-task-window/create-task-modal.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { catchError, switchMap } from 'rxjs/operators';
 import { TuiNotificationsService } from '@taiga-ui/core';
