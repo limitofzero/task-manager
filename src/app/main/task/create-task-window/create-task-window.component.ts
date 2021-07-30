@@ -3,18 +3,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UserProjectsFacadeService } from '../../project/user-projects/user-projects-facade.service';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext } from '@taiga-ui/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject} from 'rxjs';
 import { Project } from '../../project/project.interface';
 import { TaskType } from '../../task-type/task-type.interface';
 import { TaskTypeFacadeService } from '../../task-type/task-type-facade.service';
 import { User } from '../../../session/user.interface';
-import { shareReplay, startWith, switchMap } from 'rxjs/operators';
+import {shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import { UserApiService } from '../../user/user-api.service';
-import { TuiContextWithImplicit, tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
 import { CreateTask } from '../create-task.interface';
 
-@UntilDestroy()
 @Component({
   selector: 'app-create-task-window',
   templateUrl: './create-task-window.component.html',
@@ -22,6 +20,7 @@ import { CreateTask } from '../create-task.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateTaskWindowComponent implements OnInit {
+  private readonly onDestroy = new Subject<void>()
   private readonly userId: string;
 
   public readonly form: FormGroup;
@@ -46,9 +45,8 @@ export class CreateTaskWindowComponent implements OnInit {
 
   public ngOnInit(): void {
     const projectControl = this.form.get('projectId');
-    this.form
-      .get('projectId')
-      .valueChanges.pipe(startWith(projectControl.value), untilDestroyed(this))
+    projectControl
+      .valueChanges.pipe(startWith(projectControl.value), takeUntil(this.onDestroy))
       .subscribe({
         next: (value) => {
           this.performerControl.setValue(null);

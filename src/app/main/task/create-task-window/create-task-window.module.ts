@@ -31,6 +31,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
     TuiButtonModule,
     TuiHintModule,
   ],
+  entryComponents: [CreateTaskWindowComponent],
   exports: [CreateTaskWindowComponent],
 })
 export class CreateTaskWindowModule {}

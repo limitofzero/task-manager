@@ -25,8 +25,10 @@ export class CreateTaskModalService {
   }
 
   private createDialog(userId: string): Observable<any> {
+    const polymorph = new PolymorpheusComponent(CreateTaskWindowComponent, this.injector);
+
     return this.dialogService.open(
-      new PolymorpheusComponent(CreateTaskWindowComponent, this.injector),
+      polymorph,
       {
         data: { userId },
         dismissible: true,

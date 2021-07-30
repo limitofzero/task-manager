@@ -35,7 +35,8 @@ export const sessionStorage = persistState({
     MainModule,
     SessionModule,
     TuiDialogModule,
-    CreateTaskWindowModule, // todo move
+    CreateTaskWindowModule,
+    // todo move
   ],
   providers: [
     {
