@@ -20,6 +20,8 @@
 
   <tui-input-password formControlName="password"> Password </tui-input-password>
   <tui-field-error formControlName="password"></tui-field-error>
+  <tui-input-password formControlName="confirmPassword"> Confirm password </tui-input-password>
+  <tui-field-error [formGroup]="form"></tui-field-error>
   <p class="captcha-container">
     <ngx-recaptcha2
       [siteKey]="captchaKey"

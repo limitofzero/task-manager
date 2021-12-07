@@ -31,7 +31,14 @@ export class RegisterComponent {
       email: fb.control('', [Validators.required, Validators.email]),
       username: fb.control('', [Validators.required]),
       password: fb.control('', [Validators.required]),
+      confirmPassword: fb.control('', [Validators.required]),
       recaptcha: fb.control('', [Validators.required]),
+    }, {
+      validators: (group) => {
+        const passwordControl = group.get('password');
+        const confirmPasswordControl = group.get('confirmPassword');
+        return passwordControl.value !== confirmPasswordControl.value ? { fieldsAreNotEqual: true } : null;
+      }
     });
   }
 
